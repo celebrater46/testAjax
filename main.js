@@ -6,15 +6,21 @@ $('#btnsend').on('click', function(){
     $.ajax({
         url: 'helloAjax.php',
         type: 'GET',
-        dataType: 'json',
+        dataType: 'text',
         // フォーム要素の内容をハッシュ形式に変換
         data: $('form').serializeArray(),
         timeout: 5000,
-    })
-    .done(function(data) {
+    }).done(function(data) {
         // 通信成功時の処理を記述
-    })
-    .fail(function() {
+        console.log("Succeeded: data is ...");
+        // console.log(data);
+        $("#result").text(data);
+    }).fail(function(jqXHR, textStatus) {
         // 通信失敗時の処理を記述
+        console.log("Failed:");
+        // console.log(textStatus);
+        $("#result").text(textStatus);
+    }).always(function() {
+        console.log( "ajax complete" );
     });
 })
